@@ -1,4 +1,4 @@
-name: CI
+name: Cronjob will run every 5 minutes
 
 on:
   schedule:
