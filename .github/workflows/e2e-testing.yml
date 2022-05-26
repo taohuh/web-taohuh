@@ -27,9 +27,15 @@ jobs:
     name: Trigger E2E testing
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch E2E Testing
-        run: |
-          curl -X POST https://api.github.com/repos/taohuh/cypress-test-demo/dispatches \
-          -H 'Accept: application/vnd.github.everest-preview+json' \
-          -H "Authorization: token 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" \
-          --data '{"event_type": "on-demand-test", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: taohuh/cypress-test-demo
+          event-type: on-demand-test
+      # - name: Dispatch E2E Testing
+      #   run: |
+      #     curl -X POST https://api.github.com/repos/taohuh/cypress-test-demo/dispatches \
+      #     -H 'Accept: application/vnd.github.everest-preview+json' \
+      #     -u ${{ secrets.GH_TOKEN }} \
+      #     --data '{"event_type": "on-demand-test", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
