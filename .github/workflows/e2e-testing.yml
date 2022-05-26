@@ -22,6 +22,8 @@ jobs:
           # success, error, failure, or pending
           state: 'pending'
           sha: ${{github.event.pull_request.head.sha}}
+      - name: check
+        run: echo "${{secrets.GH_TOKEN}}"
 
   trigger_e2e:
     name: Trigger E2E testing
