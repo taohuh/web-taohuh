@@ -33,5 +33,5 @@ jobs:
         run: |
           curl -X POST https://api.github.com/repos/taohuh/cypress-test-demo/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u taohuh:${{ secrets.GH_TOKEN }} \
+          -u ${{ secrets.GITHUB_TOKEN }} \
           --data '{"event_type": "on-demand-test", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
