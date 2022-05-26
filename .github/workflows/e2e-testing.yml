@@ -1,7 +1,12 @@
 name: Cypress E2E testing
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -11,7 +16,7 @@ jobs:
       - name: set pending status
         uses: Sibz/github-status-action@v1
         with:
-          authToken: ${{secrets.GITHUB_TOKEN}}
+          authToken: ${{secrets.GH_TOKEN}}
           context: 'E2E tests'
           description: 'Tests pending deploy'
           # success, error, failure, or pending
