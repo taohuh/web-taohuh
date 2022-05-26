@@ -30,7 +30,7 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{secrets.GITHUB_TOKEN}}
           repository: taohuh/cypress-test-demo
           event-type: on-demand-test
       # - name: Dispatch E2E Testing
