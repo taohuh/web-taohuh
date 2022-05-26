@@ -16,7 +16,7 @@ jobs:
       - name: set pending status
         uses: Sibz/github-status-action@v1
         with:
-          authToken: ${{secrets.GH_TOKEN}}
+          authToken: ${{secrets.GITHUB_TOKEN}}
           context: 'E2E tests'
           description: 'Tests pending deploy'
           # success, error, failure, or pending
@@ -29,4 +29,4 @@ jobs:
     steps:
       - name: Dispatch E2E Testing
         run: |
-          curl -XPOST -u "${{secrets.GH_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/taohuh/cypress-test-demo/dispatches --data '{"event_type": "on-demand-test", "client_payload": {"sha": "${{github.event.pull_request.head.sha}}"}}'
+          curl -XPOST -u "${{secrets.GITHUB_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/taohuh/cypress-test-demo/dispatches --data '{"event_type": "on-demand-test", "client_payload": {"sha": "${{github.event.pull_request.head.sha}}"}}'
