@@ -1,7 +1,12 @@
 name: Cypress E2E testing
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -22,6 +27,15 @@ jobs:
     name: Trigger E2E testing
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch E2E Testing
-        run: |
-          curl -XPOST -u "${{ secrets.GH_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/taohuh/cypress-test-demo/dispatches --data '{"event_type": "on-demand-test", "client_payload": {"sha": "${{github.event.pull_request.head.sha}}"}}'
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{secrets.GH_TOKEN}}
+          repository: taohuh/cypress-test-demo
+          event-type: on-demand-test
+      # - name: Dispatch E2E Testing
+      #   run: |
+      #     curl -X POST https://api.github.com/repos/taohuh/cypress-test-demo/dispatches \
+      #     -H 'Accept: application/vnd.github.everest-preview+json' \
+      #     -u ${{ secrets.GH_TOKEN }} \
+      #     --data '{"event_type": "on-demand-test", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
