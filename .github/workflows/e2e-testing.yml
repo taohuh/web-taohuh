@@ -1,0 +1,18 @@
+name: Cypress E2E testing
+
+on:
+  pull_request
+
+jobs:
+  set_status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set pending status
+        uses: Sibz/github-status-action@v1
+        with:
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'E2E tests'
+          description: 'Tests pending deploy'
+          # success, error, failure, or pending
+          state: 'pending'
+          sha: ${{github.event.pull_request.head.sha}}
